@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class MaximumPath
 
   def initialize
@@ -21,33 +23,29 @@ class MaximumPath
     @answer = []
   end
 
-  def method_name
-
+  def maximum_path_sum
+    row = 0
+    i = 0
+    @array.map do |arr| 
+      @answer << arr[i]
+      row += 1
+      i = look_down(row, i) if @array[row]
+    end
+    binding.pry
+    @answer.inject(:+)
   end
 
-
-    # identify current location
-    # look down if there is another row
-    # select bigger num based on index == or +1 from my current position
-    # add bigger num to sum total
-    # make that new number my reference point
-
-    def maximum_path_sum
-      @answer << @array.first
-      look_down
-
-    end
-
-    def find_sum
-      @answer.flatten.inject(:+)
-    end
-
-    def look
-
-    end
-
-
-
+  def find_sum
+    @answer.flatten.inject(:+)
   end
 
+  def look_down(row, i)
+    num1 = @array[row][i]
+    num2 = @array[row][i + 1]
+    num1 > num2 ? i : (i + 1)
+  end
 end
+
+
+puts "crunching the numbers"
+puts MaximumPath.new.maximum_path_sum
