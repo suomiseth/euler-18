@@ -1,5 +1,3 @@
-require 'pry-byebug'
-
 class MaximumPath
 
   def initialize
@@ -31,8 +29,7 @@ class MaximumPath
       row += 1
       i = look_down(row, i) if @array[row]
     end
-    binding.pry
-    @answer.inject(:+)
+    find_sum
   end
 
   def find_sum
